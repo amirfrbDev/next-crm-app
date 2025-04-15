@@ -41,7 +41,7 @@ function AddCustomerPage() {
         })
     };
 
-    console.log("Add-customer page")
+    // console.log("Add-customer page")
 
     return (
         <div className='customer-page'>

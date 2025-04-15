@@ -30,7 +30,7 @@ function ItemList({ form, setForm }) {
             <p>Purchased Products</p>
             {
                 products.map((product, index) => (
-                    <ProductItem product={product} changeHandler={event => changeHandler(event, index)} deleteHandler={() => deleteHandler(index)} />
+                    <ProductItem key={index} product={product} changeHandler={event => changeHandler(event, index)} deleteHandler={() => deleteHandler(index)} />
                 ))
             }
             <button onClick={addHandler}>Add Item</button>

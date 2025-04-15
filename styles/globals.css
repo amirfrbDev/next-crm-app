@@ -138,6 +138,12 @@ h4 {
   padding: 15px;
   font-size: 1.1rem;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.item-list button:hover {
+  background-color: #8af1aa;
+  color: black;
 }
 
 .form-input__list {
@@ -174,6 +180,12 @@ h4 {
   font-size: 1.1rem;
   padding: 10px 30px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.customer-page__buttons .first:hover {
+  background-color: #f0394b;
+  color: black;
 }
 
 .customer-page__buttons .second {
@@ -185,6 +197,12 @@ h4 {
   font-size: 1.1rem;
   padding: 10px 30px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.customer-page__buttons .second:hover {
+  background-color: #8af1aa;
+  color: black;
 }
 
 .customer-detail {
