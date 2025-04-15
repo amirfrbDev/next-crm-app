@@ -41,6 +41,8 @@ function AddCustomerPage() {
         })
     };
 
+    console.log("Add-customer page")
+
     return (
         <div className='customer-page'>
             <h4>Add New Customer</h4>
