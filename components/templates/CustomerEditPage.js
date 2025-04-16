@@ -1,9 +1,10 @@
 import React from 'react'
 
-function CustomerEditPage() {
-  return (
-    <div>CustomerEditPage</div>
-  )
+function CustomerEditPage({ data, id }) {
+    console.log({ data, id })
+    return (
+        <div>CustomerEditPage</div>
+    )
 }
 
 export default CustomerEditPage
