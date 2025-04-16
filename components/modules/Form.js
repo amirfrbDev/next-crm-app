@@ -7,7 +7,6 @@ function Form({ form, setForm }) {
     const changeHandler = (event) => {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value })
-        console.log("Change", name, value)
     }
 console.log(form)
     return (

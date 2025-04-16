@@ -31,7 +31,14 @@ export default async function handler(req, res) {
             });
         }
     } else if (req.method === "GET") {
-        res.status(200).json({message:"Hello"})
+        return res.status(200).json({ message: "Hello" })
+    } else if (req.method === "DELETE") {
+        const {id} = req.body;
+        if (!id) return res.status(400).json({
+            status: "failed", message: "No Id"
+        });
+        await Customer.findByIdAndDelete(id);
+        return res.status(200).json({ status: "success", message: "Data successfully deleted" })
     }
 
 
