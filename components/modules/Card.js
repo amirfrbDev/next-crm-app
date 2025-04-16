@@ -7,8 +7,8 @@ function Card({ customer }) {
 
     const deleteHandler = async () => {
         try {
-            const res = await axios.delete('/api/customer', { data: { id: _id } });
-            console.log(res)
+            await axios.delete(`/api/customer/${_id}`);
+            window.location.reload()
         } catch (error) {
             console.log("Something Went Wrong!", error.message)
         }

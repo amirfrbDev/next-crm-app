@@ -17,6 +17,10 @@ export default async function handler(req, res) {
         if (!data.name || !data.lastName || !data.email) return res.status(400).json({ status: "failed", message: "Invalid Data!" })
 
         try {
+            const doesCustomerExist = await Customer.findOne({ email: data.email });
+            if (doesCustomerExist?._id) return res.status(400).json({
+                status: "failed", message: "Customer with this email already exists. Email must be unique!"
+            });
             const customer = await Customer.create(data)
             return res.status(201).json({
                 status: "success",
@@ -32,13 +36,6 @@ export default async function handler(req, res) {
         }
     } else if (req.method === "GET") {
         return res.status(200).json({ message: "Hello" })
-    } else if (req.method === "DELETE") {
-        const {id} = req.body;
-        if (!id) return res.status(400).json({
-            status: "failed", message: "No Id"
-        });
-        await Customer.findByIdAndDelete(id);
-        return res.status(200).json({ status: "success", message: "Data successfully deleted" })
     }
 
 

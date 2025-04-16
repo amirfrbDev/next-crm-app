@@ -22,8 +22,8 @@ function AddCustomerPage() {
     const saveHandler = async () => {
         try {
             const res = await axios.post("/api/customer", { data: form });
-            console.log(res)
-            if (res.status === "success") router.push("/")
+
+            if (res.status === 201) router.push("/")
         } catch (error) {
             console.log("Error in sending information!")
         }
