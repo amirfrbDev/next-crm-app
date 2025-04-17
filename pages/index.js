@@ -16,10 +16,10 @@ export async function getServerSideProps() {
     await connectDB();
 
     const customers = await Customer.find({});
-    console.log(customers)
+    // console.log(customers)
     return {
       props: {
-        customers: JSON.parse(JSON.stringify(customers))
+        customers: JSON.parse(JSON.stringify(customers.reverse()))
       }
     }
   } catch (error) {

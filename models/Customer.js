@@ -20,7 +20,7 @@ const customerSchema = new Schema({
     phone: String,
     address: String,
     zipCode: Number,
-    data: Date,
+    date: Date,
     products: {
         type: Array,
         default: []

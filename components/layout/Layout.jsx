@@ -4,7 +4,11 @@ function Layout({ children }) {
     return (
         <>
             <header className='header'>
-                <h2>CRM app</h2>
+
+                <Link href="/" className='header-title'>
+                    CRM app
+                </Link>
+
                 <Link href="/add-customer">
                     Add Customer
                 </Link>

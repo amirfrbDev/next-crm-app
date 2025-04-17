@@ -11,11 +11,11 @@ export default async function handler(req, res) {
         return res.status(200).json({ status: "success", message: "Data successfully deleted" })
     } else if (req.method === "PATCH") {
         try {
-            const { name, lastName, email, phone, address, zipCode, date, products } = req.body;
+            const { name, lastName, email, phone, address, zipCode, date, products } = req.body.data;
             const { customerId } = req.query;
 
             const doesEmailExist = await Customer.findOne({ email });
-            if (doesEmailExist?._id && +doesEmailExist._id !== +customerId) return res.status(400).json({ status: "failed", message: "Email Already exist in database" })
+            if (doesEmailExist?._id && doesEmailExist._id.toString() !== customerId) return res.status(400).json({ status: "failed", message: "Email Already exist in database" })
 
             const customer = await Customer.findByIdAndUpdate(
                 customerId,

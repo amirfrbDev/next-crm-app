@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         const { data } = req.body;
         if (!data.name || !data.lastName || !data.email) return res.status(400).json({ status: "failed", message: "Invalid Data!" })
-
+            console.log(data)
         try {
             const doesCustomerExist = await Customer.findOne({ email: data.email });
             if (doesCustomerExist?._id) return res.status(400).json({
