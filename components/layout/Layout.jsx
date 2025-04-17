@@ -13,7 +13,7 @@ function Layout({ children }) {
                 {children}
             </div>
             <footer className='footer'>
-                Made With ❤️ By <a href="https://github.com/amirfrbDev" target='_black' rel='noreferrer'>Amir</a> | CRM Project &copy;
+                Made With ❤️ By <a href="https://github.com/amirfrbDev" target='_black' rel='noreferrer'>Amir</a> | CRM Project &copy; 2025
             </footer>
         </>
     )

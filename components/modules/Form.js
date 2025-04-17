@@ -8,7 +8,7 @@ function Form({ form, setForm }) {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value })
     }
-console.log(form)
+    
     return (
         <div>
             <FormInput
@@ -50,7 +50,7 @@ console.log(form)
                 name="zipCode"
                 label="ZipCode"
                 type="text"
-                value={form.zipCode }
+                value={form.zipCode}
                 onChange={changeHandler}
             />
             <FormInput

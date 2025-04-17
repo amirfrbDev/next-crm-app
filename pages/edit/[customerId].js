@@ -8,13 +8,14 @@ function Index() {
     const [data, setData] = useState(null);
 
     const router = useRouter()
+
     const { query: { customerId }, isReady } = router;
-    console.log(customerId)
+    // console.log(customerId)
     useEffect(() => {
         if (!isReady) return;
         axios
             .get(`/api/customer/${customerId}`)
-            .then(res => setData(res))
+            .then(res => setData(res.data.data))
     }, [isReady])
 
     if (data) return <CustomerEditPage data={data} id={customerId} />
