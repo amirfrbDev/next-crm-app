@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
+import deleteCustomer from '../../utils/deleteCustomer'
 
 function Card({ customer }) {
     const { name, lastName, email, _id } = customer
@@ -23,7 +24,7 @@ function Card({ customer }) {
                 <p>{email}</p>
             </div>
             <div className="card__buttons">
-                <button onClick={deleteHandler}>Delete</button>
+                <button onClick={() => deleteCustomer(_id)}>Delete</button>
                 <Link href={`/edit/${_id}`}>Edit</Link>
                 <Link href={`/customer/${_id}`}>Details</Link>
             </div>

@@ -1,8 +1,15 @@
 import moment from 'moment'
-import React from 'react'
+import Link from 'next/link'
+import deleteCustomer from '../../utils/deleteCustomer'
+import DeleteCustomerModal from '../modules/DeleteCustomerModal'
+import { useState } from 'react'
+
+
 
 function CustomerDetailsPage({ data }) {
-    console.log(data)
+    const [isOpen, setIsOpen] = useState(false)
+
+
     return (
         <div className='customer-detail'>
             <h4>Customer's Details</h4>
@@ -38,9 +45,9 @@ function CustomerDetailsPage({ data }) {
             </div>
             <table className='customer-detail__products'>
                 <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                 </tr>
                 {
                     data.products.map(product => (
@@ -52,6 +59,12 @@ function CustomerDetailsPage({ data }) {
                     ))
                 }
             </table>
+            <div className='customer-detail__buttons'>
+                <p>Edit or Delete?</p>
+                <button onClick={() => setIsOpen(true)}>Delete</button>
+                <Link href={`/edit/${data._id}`}>Edit</Link>
+            </div>
+            <DeleteCustomerModal customerId={data._id} isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
     )
 }
