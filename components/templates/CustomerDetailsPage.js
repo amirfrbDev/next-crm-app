@@ -2,13 +2,24 @@ import moment from 'moment'
 import Link from 'next/link'
 import deleteCustomer from '../../utils/deleteCustomer'
 import DeleteCustomerModal from '../modules/DeleteCustomerModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 
 
 function CustomerDetailsPage({ data }) {
     const [isOpen, setIsOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (data === null || data === undefined) {
+            router.replace("/404") // use replace to avoid going back to broken page
+        }
+    }, [data])
+
+    if (!data) return null
 
     return (
         <div className='customer-detail'>
@@ -28,43 +39,57 @@ function CustomerDetailsPage({ data }) {
                 </div>
                 <div className='customer-detail__item'>
                     <span>Phone Number: </span>
-                    <p>{data.name}</p>
+                    <p>{data.phone ? data.phone : "-"}</p>
                 </div>
                 <div className='customer-detail__item'>
                     <span>Address: </span>
-                    <p>{data.name}</p>
+                    <p>{data.address ? data.address : "-"}</p>
                 </div>
                 <div className='customer-detail__item'>
                     <span>Zip Code: </span>
-                    <p>{data.zipCode}</p>
+                    <p>{data.zipCode ? data.zipCode : "-"}</p>
                 </div>
                 <div className='customer-detail__item'>
                     <span>Date: </span>
-                    <p>{moment(data.date).utc().format("YYYY-MM-DD")}</p>
+                    <p>{data.date ? moment(data.date).utc().format("YYYY-MM-DD") : "-"}</p>
                 </div>
             </div>
             <table className='customer-detail__products'>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                </tr>
-                {
-                    data.products.map(product => (
-                        <tr>
-                            <td>{product.name}</td>
-                            <td>${product.price}</td>
-                            <td>{product.quantity}</td>
-                        </tr>
-                    ))
-                }
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.products.length ? data.products.map(product => (
+                            <tr>
+                                <td>{product.name}</td>
+                                <td>${product.price}</td>
+                                <td>{product.quantity}</td>
+                            </tr>
+                        )) : (
+                            <tr className='no-product-tr'>
+                                <td colSpan="3">No Products</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
             </table>
             <div className='customer-detail__buttons'>
                 <p>Edit or Delete?</p>
                 <button onClick={() => setIsOpen(true)}>Delete</button>
                 <Link href={`/edit/${data._id}`}>Edit</Link>
             </div>
-            <DeleteCustomerModal customerId={data._id} isOpen={isOpen} setIsOpen={setIsOpen} />
+            <DeleteCustomerModal
+                customerId={data._id}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+            />
         </div>
     )
 }

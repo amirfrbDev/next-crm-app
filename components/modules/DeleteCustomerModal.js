@@ -4,9 +4,9 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import deleteCustomer from '../../utils/deleteCustomer'
 
-Modal.setAppElement('#__next') // Required for accessibility
+Modal.setAppElement('#__next')
 
-function DeleteCustomerModal({ customerId, isOpen, setIsOpen }) {
+function DeleteCustomerModal({ customerId, isOpen, setIsOpen, isLoading, setIsLoading }) {
     const router = useRouter()
 
     return (
@@ -16,7 +16,7 @@ function DeleteCustomerModal({ customerId, isOpen, setIsOpen }) {
             contentLabel="Confirm Delete"
             style={{
                 overlay: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark overlay with some opacity
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
                 },
                 content: {
                     backgroundColor: "red",
@@ -34,7 +34,18 @@ function DeleteCustomerModal({ customerId, isOpen, setIsOpen }) {
             <p>This action will delete the customer permanently.</p>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
                 <button onClick={() => setIsOpen(false)} className='cancel-button'>Cancel</button>
-                <button onClick={() => deleteCustomer(customerId, router)} className='delete-button'>Delete</button>
+                <button
+                    onClick={
+                        async () => {
+                            setIsLoading(true);
+                            console.log(router)
+                            await deleteCustomer(customerId, router);
+                            setIsOpen(false);
+                        }
+                    }
+                    className='delete-button' disabled={isLoading}>
+                    {isLoading ? "Deleting..." : "Delete"}
+                </button>
             </div>
         </Modal>
     )

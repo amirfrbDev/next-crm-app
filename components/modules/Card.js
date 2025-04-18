@@ -2,18 +2,12 @@ import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
 import deleteCustomer from '../../utils/deleteCustomer'
+import { useRouter } from 'next/router'
 
 function Card({ customer }) {
     const { name, lastName, email, _id } = customer
 
-    const deleteHandler = async () => {
-        try {
-            await axios.delete(`/api/customer/${_id}`);
-            window.location.reload()
-        } catch (error) {
-            console.log("Something Went Wrong!", error.message)
-        }
-    }
+    const router = useRouter();
 
     return (
         <div className="card">
@@ -24,7 +18,7 @@ function Card({ customer }) {
                 <p>{email}</p>
             </div>
             <div className="card__buttons">
-                <button onClick={() => deleteCustomer(_id)}>Delete</button>
+                <button onClick={() => deleteCustomer(_id, router)}>Delete</button>
                 <Link href={`/edit/${_id}`}>Edit</Link>
                 <Link href={`/customer/${_id}`}>Details</Link>
             </div>

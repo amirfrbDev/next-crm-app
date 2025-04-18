@@ -23,8 +23,6 @@ export async function getServerSideProps() {
       }
     }
   } catch (error) {
-    return {
-      notFound: true
-    }
+    throw error
   }
 }

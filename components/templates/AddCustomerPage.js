@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import Form from '../modules/Form'
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 function AddCustomerPage() {
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const [form, setForm] = useState({
         name: "",
@@ -20,12 +23,18 @@ function AddCustomerPage() {
 
 
     const saveHandler = async () => {
+        setIsLoading(true)
         try {
             const res = await axios.post("/api/customer", { data: form });
 
+            setIsLoading(false)
+            toast.success("User created successfully!")
+
             if (res.status === 201) router.push("/")
         } catch (error) {
-            console.log("Error in sending information!")
+            console.log("Error in sending information!", error.message)
+            alert(error.response.data.message)
+            setIsLoading(false)
         }
     };
     const cancelHandler = () => {
@@ -49,7 +58,9 @@ function AddCustomerPage() {
             <Form form={form} setForm={setForm} />
             <div className='customer-page__buttons'>
                 <button className='first' onClick={cancelHandler}>Cancel</button>
-                <button className='second' onClick={saveHandler}>Save</button>
+                <button className='second' onClick={saveHandler} disabled={isLoading}>
+                    {isLoading ? "Savnig..." : "Save"}
+                </button>
             </div>
         </div>
     )

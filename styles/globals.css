@@ -71,6 +71,18 @@ a {
   color: #fff !important;
 }
 
+button:disabled {
+  opacity: 0.6;
+  background-color: rgb(201, 201, 201) !important;
+  border-color: rgb(201, 201, 201);
+}
+
+button:disabled:hover {
+  opacity: 0.6;
+  background-color: rgb(201, 201, 201) !important;
+  border-color: rgb(201, 201, 201);
+}
+
 .card {
   background-color: #262836;
   color: #57aac8;
@@ -338,6 +350,19 @@ h4 {
 }
 
 
+.no-product-tr td {
+  text-align: center;
+  padding: 30px;
+  font-size: 1.3rem;
+}
+
+.no-product-tr td:hover {
+  background-color: #1f2233 !important;
+  
+}
+
+
+
 .customer-detail__buttons {
   display: flex;
   justify-content: space-between;
@@ -388,6 +413,8 @@ h4 {
 .ReactModal__Content {
   background-color: #2b2b2b !important;
   color: #fff;
+  border: none !important;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.384);
 }
 
 .delete-button,

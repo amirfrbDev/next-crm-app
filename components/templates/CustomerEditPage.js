@@ -5,6 +5,9 @@ import axios from 'axios'
 import moment from 'moment'
 
 function CustomerEditPage({ data, id }) {
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const date = data?.date ? moment(data.date).utc().format("YYYY-MM-DD") : ""
     console.log(data)
     const [form, setForm] = useState({
@@ -24,12 +27,15 @@ function CustomerEditPage({ data, id }) {
     const cancelHandler = () => router.push("/");
 
     const saveHandler = async () => {
+        setIsLoading(true)
         try {
             axios
                 .patch(`/api/customer/${id}`, { data: form })
-                .then(res => router.push('/'))
+                .then(() => setIsLoading(false))
+                .then(() => router.push('/'))
         } catch (error) {
             console.log("Editing page went wrong!", error.message)
+            setIsLoading(false)
         }
     }
 
@@ -39,7 +45,9 @@ function CustomerEditPage({ data, id }) {
             <Form form={form} setForm={setForm} />
             <div className="customer-page__buttons">
                 <button className='first' onClick={cancelHandler}>Cancel</button>
-                <button className='second' onClick={saveHandler}>Edit</button>
+                <button className='second' onClick={saveHandler} disabled={isLoading}>
+                    {isLoading ? "Editing..." :"Edit"}
+                </button>
             </div>
         </div>
     )
