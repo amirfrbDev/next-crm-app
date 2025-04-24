@@ -26,6 +26,22 @@ a {
   margin: 20px 0 40px;
 }
 
+.header button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  margin-right: 15px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.header>div {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
 .main {
   min-height: 85vh;
 }
@@ -69,6 +85,64 @@ a {
   background-color: transparent !important;
   border: none !important;
   color: #fff !important;
+}
+
+.searchbar {
+  font-size: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.searchbar input {
+  height: 35px;
+  width: 200px;
+  background-color: #1f2233;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 200;
+}
+
+.searchbar .search-button {
+  font-size: 1.4rem;
+  margin-left: 5px;
+  padding: 5px;
+  background-color: #47495a !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 3px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.1s;
+  /* all:unset */
+}
+
+.searchbar .search-button:hover {
+  background-color: #3f4150 !important;
+}
+
+.searchbar .search-button:active {
+  background-color: #2f313a !important  ;
+}
+
+.searchbar button {
+  background-color: transparent;
+  font-size: 2.2rem;
+  margin-right: 0px;
+}
+
+.searchbar input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(70, 130, 180, 0.4); /* steelblue-ish, darker and subtle */
+    border: 1px solid #4682b4; /* darker skyblue border */
+    transition: all 0.2s ease;
 }
 
 button:disabled {
@@ -358,7 +432,7 @@ h4 {
 
 .no-product-tr td:hover {
   background-color: #1f2233 !important;
-  
+
 }
 
 
