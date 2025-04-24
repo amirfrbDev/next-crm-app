@@ -22,8 +22,11 @@ function Layout({ children }) {
     useEffect(() => {
         if (router.route.includes("search")) {
             setIsSearchOpen(true);
+        } else {
+            
+            setIsSearchOpen(false);
         }
-    }, []);
+    }, [router.route]);
 
     useEffect(() => {
         const enterClickHandler = (event) => {

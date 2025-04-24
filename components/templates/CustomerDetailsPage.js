@@ -14,7 +14,7 @@ function CustomerDetailsPage({ data }) {
         if (data === null || data === undefined) {
             router.replace("/404") 
         }
-    }, [data])
+    }, [data, router])
 
     useEffect(() => {
         if (!data) return;
