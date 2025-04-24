@@ -16,11 +16,16 @@ function Index() {
 
     useEffect(() => {
         if (!isReady) return;
-        axios
-            .get(`/api/customer/${customerId}`)
-            .then(res => setData(res.data))
-    }, [isReady])
+        if (customerId) {
+            axios
+                .get(`/api/customer/${customerId}`)
+                .then(res => setData(res.data))
+                .catch(err => console.error(err));
+        }
+    }, [isReady, customerId])
+
 
     if (data) return <CustomerDetailsPage data={data.data} />
-    }
+
+}
 export default Index

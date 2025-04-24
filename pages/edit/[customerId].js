@@ -10,15 +10,18 @@ function Index() {
     const router = useRouter()
 
     const { query: { customerId }, isReady } = router;
-    // console.log(customerId)
+    
     useEffect(() => {
         if (!isReady) return;
-        axios
-            .get(`/api/customer/${customerId}`)
-            .then(res => setData(res.data.data))
-    }, [isReady])
+        if (customerId) {
+            axios
+                .get(`/api/customer/${customerId}`)
+                .then(res => setData(res.data))
+                .catch(err => console.error(err));
+        }
+    }, [isReady, customerId])
 
-    if (data) return <CustomerEditPage data={data} id={customerId} />
+    if (data) return <CustomerEditPage data={data.data} id={customerId} />
 }
 
 export default Index

@@ -1,29 +1,30 @@
 import moment from 'moment'
 import Link from 'next/link'
-import deleteCustomer from '../../utils/deleteCustomer'
 import DeleteCustomerModal from '../modules/DeleteCustomerModal'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-
-
 function CustomerDetailsPage({ data }) {
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
+    const [error, setError] = useState(null) 
     const router = useRouter();
 
     useEffect(() => {
         if (data === null || data === undefined) {
-            router.replace("/404") // use replace to avoid going back to broken page
+            router.replace("/404") 
         }
+    }, [data])
+
+    useEffect(() => {
+        if (!data) return;
     }, [data])
 
     if (!data) return null
 
     return (
         <div className='customer-detail'>
-            <h4>Customer's Details</h4>
+            <h4>Customer&apos;s Details</h4>
             <div className='customer-detail__main'>
                 <div className='customer-detail__item'>
                     <span>Name: </span>
@@ -65,7 +66,7 @@ function CustomerDetailsPage({ data }) {
                 <tbody>
                     {
                         data.products.length ? data.products.map(product => (
-                            <tr>
+                            <tr key={product._id}> 
                                 <td>{product.name}</td>
                                 <td>${product.price}</td>
                                 <td>{product.quantity}</td>
@@ -80,7 +81,7 @@ function CustomerDetailsPage({ data }) {
             </table>
             <div className='customer-detail__buttons'>
                 <p>Edit or Delete?</p>
-                <button onClick={() => setIsOpen(true)}>Delete</button>
+                <button onClick={() => setIsOpen(true)} aria-label="Delete customer">Delete</button>
                 <Link href={`/edit/${data._id}`}>Edit</Link>
             </div>
             <DeleteCustomerModal
@@ -89,7 +90,9 @@ function CustomerDetailsPage({ data }) {
                 setIsOpen={setIsOpen}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                setError={setError} 
             />
+            {error && <p className="error">{error}</p>}
         </div>
     )
 }

@@ -27,9 +27,9 @@ function Layout({ children }) {
 
     useEffect(() => {
         const enterClickHandler = (event) => {
-            if (event.key === "Enter") {
+            if (event.key === "Enter" && search.trim()) {
                 event.preventDefault();
-                router.push(`/search?query=${search}`);
+                router.push(`/search?query=${search.trim()}`);
             }
         };
 
@@ -61,7 +61,11 @@ function Layout({ children }) {
                             />
                             <button
                                 className='search-button'
-                                onClick={() => router.push(`/search?query=${search}`)}
+                                onClick={() => {
+                                    if (search.trim()) {
+                                        router.push(`/search?query=${search.trim()}`);
+                                    }
+                                }}
                                 ref={searchButton}
                             >
                                 <FaArrowRight />
