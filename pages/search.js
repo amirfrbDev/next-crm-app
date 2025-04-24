@@ -10,7 +10,7 @@ function Search({ customers }) {
 
     return (
         <div>
-            <h3 style={{ color: "#fff", margin: "40px 0px" }}>Customers With "{router.query.query}" Name:</h3>
+            <h3 style={{ color: "#fff", margin: "40px 0px" }}>Customers With &quot;{router.query.query}&quot; Name:</h3>
             {
                 customers.length ? customers.map(customer => (
                     <Card key={customer._id} customer={customer} />
